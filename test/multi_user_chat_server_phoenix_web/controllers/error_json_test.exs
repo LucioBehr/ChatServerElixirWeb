@@ -2,7 +2,9 @@ defmodule MultiUserChatServerPhoenixWeb.ErrorJSONTest do
   use MultiUserChatServerPhoenixWeb.ConnCase, async: true
 
   test "renders 404" do
-    assert MultiUserChatServerPhoenixWeb.ErrorJSON.render("404.json", %{}) == %{errors: %{detail: "Not Found"}}
+    assert MultiUserChatServerPhoenixWeb.ErrorJSON.render("404.json", %{}) == %{
+             errors: %{detail: "Not Found"}
+           }
   end
 
   test "renders 500" do

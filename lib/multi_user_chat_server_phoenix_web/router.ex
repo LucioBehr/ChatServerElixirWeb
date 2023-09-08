@@ -8,7 +8,8 @@ defmodule MultiUserChatServerPhoenixWeb.Router do
   scope "/", MultiUserChatServerPhoenixWeb do
     pipe_through :api
     post "/create_user", PrivateController, :create_user
-    get "/get_all", PrivateController, :get_all #
+    #
+    get "/get_all", PrivateController, :get_all
     post "/delete_user", PrivateController, :delete_user
     post "/alter_name", PrivateController, :alter_name
     get "/get_user", PrivateController, :get_user
@@ -26,6 +27,5 @@ defmodule MultiUserChatServerPhoenixWeb.Router do
     post "/enter_group", GroupController, :enter_group
     get "/get_group", GroupController, :get_group
     get "/get_all_groups", GroupController, :get_all_groups
-
   end
 end

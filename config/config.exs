@@ -14,7 +14,10 @@ config :multi_user_chat_server_phoenix,
 config :multi_user_chat_server_phoenix, MultiUserChatServerPhoenixWeb.Endpoint,
   url: [host: "localhost"],
   render_errors: [
-    formats: [html: MultiUserChatServerPhoenixWeb.ErrorHTML, json: MultiUserChatServerPhoenixWeb.ErrorJSON],
+    formats: [
+      html: MultiUserChatServerPhoenixWeb.ErrorHTML,
+      json: MultiUserChatServerPhoenixWeb.ErrorJSON
+    ],
     layout: false
   ],
   pubsub_server: MultiUserChatServerPhoenix.PubSub,
@@ -27,7 +30,8 @@ config :multi_user_chat_server_phoenix, MultiUserChatServerPhoenixWeb.Endpoint,
 #
 # For production it's recommended to configure a different adapter
 # at the `config/runtime.exs`.
-config :multi_user_chat_server_phoenix, MultiUserChatServerPhoenix.Mailer, adapter: Swoosh.Adapters.Local
+config :multi_user_chat_server_phoenix, MultiUserChatServerPhoenix.Mailer,
+  adapter: Swoosh.Adapters.Local
 
 # Configure esbuild (the version is required)
 config :esbuild,
