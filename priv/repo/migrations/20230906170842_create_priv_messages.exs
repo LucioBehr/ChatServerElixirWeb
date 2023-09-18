@@ -6,6 +6,8 @@ defmodule MultiUserChatServerPhoenix.Repo.Migrations.CreatePrivMessages do
       add :sender_id, references(:users, on_delete: :nothing)
       add :receiver_id, references(:users, on_delete: :nothing)
       add :content, :string
+
+      timestamps()
     end
   end
 end

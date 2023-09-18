@@ -12,8 +12,8 @@ defmodule MultiUserChatServerPhoenix.Application do
       MultiUserChatServerPhoenix.Repo,
       {Phoenix.PubSub, name: MultiUserChatServerPhoenix.PubSub},
       {Finch, name: MultiUserChatServerPhoenix.Finch},
-      MultiUserChatServerPhoenixWeb.Endpoint,
-      {MultiUserChatServerPhoenix, []}
+      MultiUserChatServerPhoenixWeb.Endpoint
+      #,{MultiUserChatServerPhoenix, []}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

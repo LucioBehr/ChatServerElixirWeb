@@ -3,59 +3,61 @@ defmodule MultiUserChatServerPhoenixWeb.GroupController do
 
   alias MultiUserChatServerPhoenix, as: Server
 
+  def validate_response(response, expected_func) do
+    case response do
+      {:ok, function_response} -> {200, expected_func.(function_response)}
+      {:error, reason} -> {400, to_string(reason)}
+    end
+  end
+
+  def validate_response(response) do
+    case response do
+      {:error, reason} -> {400, Jason.encode!(reason)}
+      {:ok, function_response} -> {200, Jason.encode!(function_response)}
+      function_response -> {200, Jason.encode!(function_response)}
+    end
+  end
+
   def create_group(conn, params) do
     response =
-      Server.create_group(params["user_id"], params["group_name"])
-      |> Jason.encode!()
+      Server.create_group(params)
+      |> validate_response(fn group_struct ->
+        "group #{params["group_name"]} created with id #{group_struct.id}"
+      end)
 
-    send_resp(conn, 200, response)
+    send_resp(conn, elem(response, 0), elem(response, 1))
   end
 
-  def get_group_messages(conn, params) do
+  def get_received_group_messages(conn, params) do
     response =
-      Server.get_group_messages(params["user_id"], params["group_id"])
-      |> Jason.encode!()
-
-    send_resp(conn, 200, response)
+      Server.get_received_group_messages(params)
+      |> validate_response()
+    send_resp(conn, elem(response, 0), elem(response, 1))
   end
 
-  def get_all_group_messages(conn, _params) do
+  def get_sended_group_messages(conn, params) do
     response =
-      Server.get_all_group_messages()
-      |> Jason.encode!()
+      Server.get_sended_group_messages(params)
+      |> validate_response()
 
-    send_resp(conn, 200, response)
+    send_resp(conn, elem(response, 0), elem(response, 1))
   end
 
   def send_group_message(conn, params) do
     response =
-      Server.send_group_message(params["user_id"], params["group_id"], params["content"])
-      |> Jason.encode!()
-
-    send_resp(conn, 200, response)
+      Server.send_group_message(params)
+      |> validate_response(fn _ ->
+        "message #{params["content"]} sent to group #{params["group_id"]}"
+      end)
+    send_resp(conn, elem(response, 0), elem(response, 1))
   end
 
   def enter_group(conn, params) do
     response =
-      Server.enter_group(params["user_id"], params["group_id"])
-      |> Jason.encode!()
-
-    send_resp(conn, 200, response)
-  end
-
-  def get_group(conn, params) do
-    response =
-      Server.get_group(params["group_id"])
-      |> Jason.encode!()
-
-    send_resp(conn, 200, response)
-  end
-
-  def get_all_groups(conn, _params) do
-    response =
-      Server.get_group()
-      |> Jason.encode!()
-
-    send_resp(conn, 200, response)
+      Server.enter_group(params)
+      |> validate_response(fn _ ->
+        "user #{params["user_id"]} entered group #{params["group_id"]}"
+      end)
+    send_resp(conn, elem(response, 0), elem(response, 1))
   end
 end

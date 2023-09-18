@@ -4,6 +4,8 @@ defmodule MultiUserChatServerPhoenix.Repo.Migrations.CreateGroup do
   def change do
     create table(:groups) do
       add :group_name, :string
+      add :deleted, :boolean, default: false
+      timestamps()
     end
   end
 end
