@@ -6,7 +6,7 @@ import Config
 # to provide built-in test partitioning in CI environment.
 # Run `mix help test` for more information.
 config :multi_user_chat_server_phoenix, MultiUserChatServerPhoenix.Repo,
-  username: "postgres",
+  username: "macbook",
   password: "postgres",
   hostname: "localhost",
   database: "multi_user_chat_server_phoenix_test#{System.get_env("MIX_TEST_PARTITION")}",

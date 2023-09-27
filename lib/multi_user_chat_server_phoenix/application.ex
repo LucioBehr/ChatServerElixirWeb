@@ -13,7 +13,7 @@ defmodule MultiUserChatServerPhoenix.Application do
       {Phoenix.PubSub, name: MultiUserChatServerPhoenix.PubSub},
       {Finch, name: MultiUserChatServerPhoenix.Finch},
       MultiUserChatServerPhoenixWeb.Endpoint
-      #,{MultiUserChatServerPhoenix, []}
+      # ,{MultiUserChatServerPhoenix, []}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

@@ -6,7 +6,7 @@ defmodule MultiUserChatServerPhoenixWeb.ChatServerPrivate do
   end
 
   def get_user(user_id) do
-      Users.get_user(user_id)
+    Users.get_user(user_id)
   end
 
   def create_user(user_name) do
@@ -43,9 +43,7 @@ defmodule MultiUserChatServerPhoenixWeb.ChatServerPrivate do
   end
 
   def send_priv_message(sender, receiver, content) do
-
     Users.validate_user([sender, receiver], fn ->
-
       PrivMessages.insert_priv_message(sender, receiver, content)
     end)
   end

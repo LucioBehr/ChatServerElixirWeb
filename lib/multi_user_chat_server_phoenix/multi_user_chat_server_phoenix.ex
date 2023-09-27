@@ -16,8 +16,7 @@ defmodule MultiUserChatServerPhoenix do
         "receiver" => receiver,
         "content" => content
       }),
-      do:
-        PrivLogic.send_priv_message(sender, receiver, content)
+      do: PrivLogic.send_priv_message(sender, receiver, content)
 
   def get_sended_private_messages(%{"user_id" => user_id}),
     do: PrivLogic.get_sended_messages(user_id)

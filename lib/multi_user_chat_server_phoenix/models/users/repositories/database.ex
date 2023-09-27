@@ -6,6 +6,7 @@ defmodule MultiUserChatServerPhoenix.Models.Users.Repositories.Database do
     case Repo.get_by(User, %{id: head, deleted: false}) do
       nil ->
         {:error, :missing_user}
+
       _ ->
         func.()
     end
@@ -15,15 +16,22 @@ defmodule MultiUserChatServerPhoenix.Models.Users.Repositories.Database do
     case Repo.get_by(User, %{id: head, deleted: false}) do
       nil ->
         {:error, :missing_user}
+
       _ ->
         validate_user(tail, func)
     end
   end
 
   def get_user(user_id) do
-      validate_user([user_id], fn ->
-        Repo.get_by(User, %{id: user_id})
-      end)
+    validate_user([user_id], fn ->
+      {:ok, Repo.get_by(User, %{id: user_id})}
+    end)
+  end
+
+  defp get_user_data(user_id) do
+    validate_user([user_id], fn ->
+      Repo.get_by(User, %{id: user_id})
+    end)
   end
 
   def create_user(user_name) do
@@ -34,21 +42,21 @@ defmodule MultiUserChatServerPhoenix.Models.Users.Repositories.Database do
 
   def delete_user(user_id) do
     validate_user([user_id], fn ->
-      Repo.update(User.changeset(get_user(user_id), %{deleted: true}))
+      Repo.update(User.changeset(get_user_data(user_id), %{deleted: true}))
     end)
   end
 
   def update_last_checked_at(user_id) do
-    get_user(user_id)
+    get_user_data(user_id)
 
     validate_user([user_id], fn ->
-      Repo.update(User.changeset(get_user(user_id), %{last_checked_at: NaiveDateTime.utc_now()}))
+      Repo.update(User.changeset(get_user_data(user_id), %{last_checked_at: NaiveDateTime.utc_now()}))
     end)
   end
 
   def alter_user_name(user_id, user_name) do
     validate_user([user_id], fn ->
-      Repo.update(User.changeset(get_user(user_id), %{user_name: user_name}))
+      Repo.update(User.changeset(get_user_data(user_id), %{user_name: user_name}))
     end)
   end
 end

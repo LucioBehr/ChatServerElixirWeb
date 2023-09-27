@@ -1,7 +1,6 @@
 defmodule MultiUserChatServerPhoenix.Models.UsersGroups.Schema.UserGroup do
   use Ecto.Schema
 
-
   @derive {Jason.Encoder, only: [:user_id, :group_id, :admin]}
   schema "users_groups" do
     field :admin, :boolean, default: false
