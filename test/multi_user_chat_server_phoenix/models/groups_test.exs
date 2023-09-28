@@ -12,9 +12,11 @@ defmodule MultiUserChatServerPhoenix.Models.GroupsTest do
       {:ok, group} = Groups.create_group("test_group")
       assert group.group_name == "test_group"
     end
+
     test "creates a group using a blank name" do
       assert {:error, %_{errors: [group_name: {"can't be blank", _}]}} = Groups.create_group("")
     end
+
     test "creates a group using a invalid type" do
       assert {:error, %_{errors: [group_name: {"is invalid", _}]}} = Groups.create_group(2)
     end

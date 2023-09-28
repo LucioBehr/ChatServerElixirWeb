@@ -50,7 +50,9 @@ defmodule MultiUserChatServerPhoenix.Models.Users.Repositories.Database do
     get_user_data(user_id)
 
     validate_user([user_id], fn ->
-      Repo.update(User.changeset(get_user_data(user_id), %{last_checked_at: NaiveDateTime.utc_now()}))
+      Repo.update(
+        User.changeset(get_user_data(user_id), %{last_checked_at: NaiveDateTime.utc_now()})
+      )
     end)
   end
 

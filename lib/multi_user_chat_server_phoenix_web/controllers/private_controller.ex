@@ -1,5 +1,4 @@
 defmodule MultiUserChatServerPhoenixWeb.PrivateController do
-
   use MultiUserChatServerPhoenixWeb, :controller
   alias MultiUserChatServerPhoenix.Models.Operations
 

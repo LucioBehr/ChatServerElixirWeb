@@ -7,7 +7,7 @@
 # General application configuration
 import Config
 
-  # test configs
+# test configs
 config :multi_user_chat_server_phoenix, MultiUserChatServerPhoenixWeb.Repo,
   database: "multi_user_chat_server_phoenix_repo",
   username: "postgres",
@@ -50,13 +50,13 @@ config :esbuild,
     env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
   ]
 
-
-config :brod, clients: [
-  kafka_client: [
-    endpoints: [{"localhost", 9092}],
-    auto_start_producers: true
+config :brod,
+  clients: [
+    kafka_client: [
+      endpoints: [{"localhost", 9092}],
+      auto_start_producers: true
+    ]
   ]
-]
 
 # Configure tailwind (the version is required)
 config :tailwind,
